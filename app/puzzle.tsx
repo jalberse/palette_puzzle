@@ -31,14 +31,10 @@ import PaletteButton from './PaletteButton';
 const Puzzle = () => {
   const fixedSeed = 0;
 
-  const [currentColor, setCurrentColor] = useState<{ r: number; g: number; b: number; }>({ r: 0, g: 0, b: 0 });
-  const [targetColor, setTargetColor] = useState<{ r: number; g: number; b: number; }>({ r: 0, g: 0, b: 0 });
+  const [currentColor, setCurrentColor] = useState<RGBColor>({ r: 0, g: 0, b: 0 });
+  const [targetColor, setTargetColor] = useState<RGBColor>({ r: 0, g: 0, b: 0 });
+  const [history, setHistory] = useState<RGBColor[]>([]); 
   const [score, setScore] = useState(0);
-
-  // TODO Similar to the tik-tak-toe example, check for a win condition: the colors match.
-  //      If they do, display a "You win!" message with the score.
-  //      While they haven't won, display the current score: the number of times any of the buttons has been clicked.
-  //      (the goal is to get the lowest score possible)
 
   // Note that [] as the second argument means that this effect will only run once on Mount.
   useEffect(() => {
@@ -46,40 +42,21 @@ const Puzzle = () => {
     setTargetColor(getRandomColor());
   }, []);
 
-  const addWhite = () => {
-    setCurrentColor(prev => addColor(prev, { r: 1, g: 1, b: 1 }));
+  function playTurn(colorChange: RGBColor) {
+    const nextColor = addColor(currentColor, colorChange);
+    setHistory([...history, nextColor]);
+    setCurrentColor(nextColor);
     setScore(prev => prev + 1);
-  };
-  const removeWhite = () => {
-    setCurrentColor(prev => addColor(prev, { r: -1, g: -1, b: -1 }));
-    setScore(prev => prev + 1);
-  };
+  }
 
-  const addRed = () => {
-    setCurrentColor(prev => addColor(prev, { r: 1, g: 0, b: 0 }));
-    setScore(prev => prev + 1);
-  };
-  const addGreen = () => {
-    setCurrentColor(prev => addColor(prev, { r: 0, g: 1, b: 0 }));
-    setScore(prev => prev + 1);
-  };
-  const addBlue = () => {
-    setCurrentColor(prev => addColor(prev, { r: 0, g: 0, b: 1 }));
-    setScore(prev => prev + 1);
-  };
-
-  const removeRed = () => {
-    setCurrentColor(prev => addColor(prev, { r: -1, g: 0, b: 0 }));
-    setScore(prev => prev + 1);
-  };
-  const removeGreen = () => {
-    setCurrentColor(prev => addColor(prev, { r: 0, g: -1, b: 0 }));
-    setScore(prev => prev + 1);
-  };
-  const removeBlue = () => {
-    setCurrentColor(prev => addColor(prev, { r: 0, g: 0, b: -1 }));
-    setScore(prev => prev + 1);
-  };
+  const addWhite = () => { playTurn({ r: 1, g: 1, b: 1 }); };
+  const removeWhite = () => { playTurn({ r: -1, g: -1, b: -1 }); };
+  const addRed = () => { playTurn({ r: 1, g: 0, b: 0 }); };
+  const addGreen = () => { playTurn({ r: 0, g: 1, b: 0 }); };
+  const addBlue = () => { playTurn({ r: 0, g: 0, b: 1 }); };
+  const removeRed = () => { playTurn({ r: -1, g: 0, b: 0 }); };
+  const removeGreen = () => { playTurn({ r: 0, g: -1, b: 0 }); };
+  const removeBlue = () => { playTurn({ r: 0, g: 0, b: -1 }); };
 
   // TODO More similar to wordle, I might expect that we lift the state up
   //   and display a win "card" over the puzzle? Go check out wordle.
@@ -93,9 +70,7 @@ const Puzzle = () => {
     );
   }
   
-  // TODO Reference tik-tak-toe and create a running list of all the currentColors as they change.
-  //      This will let us store the history of the game and replay it, or create a gradient on win.
-
+  // TODO Delete the target and current, just using for debugging.
   // TODO Fix button positionings, make it pretty.
   return (
     <div className="flex flex-col items-stretch gap-1">
