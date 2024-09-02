@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { addColor, getRandomColor, rgbToString } from "./rgb";
+import { addColor, getRandomColor, RGBColor, rgbToString } from "./rgb";
 import ColorDisplay from './ColorDisplay';
+import PaletteButton from './PaletteButton';
 
 // TODO A component that takes props to affectColor() (which we'll pass e.g. addRed() or addBlue())
 //      and the button's display color.
@@ -49,12 +50,12 @@ const Puzzle = () => {
     <div className="flex flex-col items-center">
       <ColorDisplay targetColor={targetColor} currentColor={currentColor} rgbToString={rgbToString} />
       <div className="grid grid-cols-3 gap-1">
-          <button onClick={addRed} style={{ width: "50px", height: "50px", backgroundColor: "red", borderRadius: "10px", color: "white"}}>+</button>
-          <button onClick={addGreen} style={{ width: "50px", height: "50px", backgroundColor: "green", borderRadius: "10px", color: "white" }}>+</button>
-          <button onClick={addBlue} style={{ width: "50px", height: "50px", backgroundColor: "blue", borderRadius: "10px", color: "white" }}>+</button>
-          <button onClick={removeRed} style={{ width: "50px", height: "50px", backgroundColor: "red", borderRadius: "10px", color: "white" }}>-</button>
-          <button onClick={removeGreen} style={{ width: "50px", height: "50px", backgroundColor: "green", borderRadius: "10px", color: "white" }}>-</button>
-          <button onClick={removeBlue} style={{ width: "50px", height: "50px", backgroundColor: "blue", borderRadius: "10px", color: "white" }}>-</button>
+        <PaletteButton increase={true} backgroundColor="red" onClick={addRed} />
+        <PaletteButton increase={true} backgroundColor="green" onClick={addGreen} />
+        <PaletteButton increase={true} backgroundColor="blue" onClick={addBlue} />
+        <PaletteButton increase={false} backgroundColor="red" onClick={removeRed} />
+        <PaletteButton increase={false} backgroundColor="green" onClick={removeGreen} />
+        <PaletteButton increase={false} backgroundColor="blue" onClick={removeBlue} />
       </div>
     </div>
   );
