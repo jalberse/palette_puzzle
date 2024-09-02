@@ -7,6 +7,12 @@ interface ColorDisplayProps {
 }
 
 const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, rgbToString }) => {
+  
+  // TODO Consider having the gap between the elements shrink as we approach the target
+  //      color, so that they *just* touch when the colors are equal (but not until then).
+  
+  // TODO And consider tailwind classes...
+
   return (
     <div className="mb-4">
       <div

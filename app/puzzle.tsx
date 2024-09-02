@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { addColor, getRandomColor, RGBColor, rgbToString } from "./rgb";
+import { addColor, colorsApproxEqual, colorsEqual, getRandomColor, RGBColor, rgbToString } from "./rgb";
 import ColorDisplay from './ColorDisplay';
 import PaletteButton from './PaletteButton';
 
@@ -33,6 +33,12 @@ const Puzzle = () => {
 
   const [currentColor, setCurrentColor] = useState<{ r: number; g: number; b: number; }>({ r: 0, g: 0, b: 0 });
   const [targetColor, setTargetColor] = useState<{ r: number; g: number; b: number; }>({ r: 0, g: 0, b: 0 });
+  const [score, setScore] = useState(0);
+
+  // TODO Similar to the tik-tak-toe example, check for a win condition: the colors match.
+  //      If they do, display a "You win!" message with the score.
+  //      While they haven't won, display the current score: the number of times any of the buttons has been clicked.
+  //      (the goal is to get the lowest score possible)
 
   // Note that [] as the second argument means that this effect will only run once on Mount.
   useEffect(() => {
@@ -40,22 +46,63 @@ const Puzzle = () => {
     setTargetColor(getRandomColor());
   }, []);
 
-  const addWhite = () => setCurrentColor(prev => addColor(prev, { r: 1, g: 1, b: 1 }));
-  const removeWhite = () => setCurrentColor(prev => addColor(prev, { r: -1, g: -1, b: -1 }));
+  const addWhite = () => {
+    setCurrentColor(prev => addColor(prev, { r: 1, g: 1, b: 1 }));
+    setScore(prev => prev + 1);
+  };
+  const removeWhite = () => {
+    setCurrentColor(prev => addColor(prev, { r: -1, g: -1, b: -1 }));
+    setScore(prev => prev + 1);
+  };
 
-  const addRed = () => setCurrentColor(prev => addColor(prev, { r: 1, g: 0, b: 0 }));
-  const addGreen = () => setCurrentColor(prev => addColor(prev, { r: 0, g: 1, b: 0 }));
-  const addBlue = () => setCurrentColor(prev => addColor(prev, { r: 0, g: 0, b: 1 }));
+  const addRed = () => {
+    setCurrentColor(prev => addColor(prev, { r: 1, g: 0, b: 0 }));
+    setScore(prev => prev + 1);
+  };
+  const addGreen = () => {
+    setCurrentColor(prev => addColor(prev, { r: 0, g: 1, b: 0 }));
+    setScore(prev => prev + 1);
+  };
+  const addBlue = () => {
+    setCurrentColor(prev => addColor(prev, { r: 0, g: 0, b: 1 }));
+    setScore(prev => prev + 1);
+  };
 
-  const removeRed = () => setCurrentColor(prev => addColor(prev, { r: -1, g: 0, b: 0 }));
-  const removeGreen = () => setCurrentColor(prev => addColor(prev, { r: 0, g: -1, b: 0 }));
-  const removeBlue = () => setCurrentColor(prev => addColor(prev, { r: 0, g: 0, b: -1 }));
+  const removeRed = () => {
+    setCurrentColor(prev => addColor(prev, { r: -1, g: 0, b: 0 }));
+    setScore(prev => prev + 1);
+  };
+  const removeGreen = () => {
+    setCurrentColor(prev => addColor(prev, { r: 0, g: -1, b: 0 }));
+    setScore(prev => prev + 1);
+  };
+  const removeBlue = () => {
+    setCurrentColor(prev => addColor(prev, { r: 0, g: 0, b: -1 }));
+    setScore(prev => prev + 1);
+  };
+
+  // TODO More similar to wordle, I might expect that we lift the state up
+  //   and display a win "card" over the puzzle? Go check out wordle.
+  const win = colorsApproxEqual(currentColor, targetColor, 0);
+  if (win) {
+    return (
+      <div>
+        <h1>You win!</h1>
+        <p>Score: {score}</p>
+      </div>
+    );
+  }
+  
+  // TODO Reference tik-tak-toe and create a running list of all the currentColors as they change.
+  //      This will let us store the history of the game and replay it, or create a gradient on win.
 
   // TODO Fix button positionings, make it pretty.
-
   return (
     <div className="flex flex-col items-stretch gap-1">
+      <h1 className="items-center text-4xl font-bold">{score}</h1>
       <ColorDisplay targetColor={targetColor} currentColor={currentColor} rgbToString={rgbToString} />
+      <p>Target: {rgbToString(targetColor)}</p>
+      <p>Current: {rgbToString(currentColor)}</p>
       <PaletteButton increase={true} onClick={addWhite} className="
         bg-game-button-white
         active:bg-game-button-white-active

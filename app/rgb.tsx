@@ -6,6 +6,28 @@ export type RGBColor = {
   b: number;
 };
 
+// Implement equality for RGBColor
+export function colorsEqual(a: RGBColor, b: RGBColor) {
+  return a.r === b.r && a.g === b.g && a.b === b.b;
+}
+
+// Approximate equality; tolerance is element-wise
+export function colorsApproxEqual(a: RGBColor, b: RGBColor, tolerance: number) {
+  return (
+    Math.abs(a.r - b.r) <= tolerance &&
+    Math.abs(a.g - b.g) <= tolerance &&
+    Math.abs(a.b - b.b) <= tolerance
+  );
+}
+
+// Get the euclidian distance between two colors
+export function colorDistance(a: RGBColor, b: RGBColor) {
+  return Math.sqrt(
+    Math.pow(a.r - b.r, 2) + Math.pow(a.g - b.g, 2) + Math.pow(a.b - b.b, 2)
+  );
+}
+
+
 export function getRandomColor() {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
