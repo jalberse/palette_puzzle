@@ -2,24 +2,27 @@ import React from 'react';
 
 interface PaletteButtonProps {
   increase: boolean;
-  backgroundColor: string;
+  className: string;
   onClick: () => void;
 }
 
-const PaletteButton: React.FC<PaletteButtonProps> = ({ increase, backgroundColor, onClick }) => {
+const PaletteButton: React.FC<PaletteButtonProps> = ({
+  increase,
+  className,
+  onClick,
+}) => {
   return (
-    <button 
+    <button
       onClick={onClick} 
-      style={{ 
-        width: "50px", 
-        height: "50px", 
-        backgroundColor: backgroundColor, 
-        borderRadius: "10px", 
-        color: "white"
-      }}
-    >
-      {increase ? '+' : '-'}
-    </button>
+      type="button"
+      className={
+        "rounded-md " +
+        "text-2xl " +
+        className
+      }
+      >
+        {increase ? '+' : '-'}
+      </button>
   );
 };
 

@@ -11,7 +11,7 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
     <div className="mb-4">
       <div
         style={{
-          width: "150px",
+          width: "90%px",
           height: "150px",
           backgroundColor: rgbToString(targetColor),
           display: "flex",

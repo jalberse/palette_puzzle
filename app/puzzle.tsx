@@ -5,9 +5,6 @@ import { addColor, getRandomColor, RGBColor, rgbToString } from "./rgb";
 import ColorDisplay from './ColorDisplay';
 import PaletteButton from './PaletteButton';
 
-// TODO A component that takes props to affectColor() (which we'll pass e.g. addRed() or addBlue())
-//      and the button's display color.
-//      We can use that to define the buttons once.
 // TODO A white button and a black button that adds/subtracts all elements equally to just
 //      get brighter or darker.
 // TODO Display the current score; the number of times any of the buttons has been clicked.
@@ -21,10 +18,15 @@ import PaletteButton from './PaletteButton';
 // TODO e.g. we could make another puzzle that's the same, but you're matching two *gradients*.
 //      So you need to match the start and the end color. That could be interesting.
 // TODO Generate a new start and target color each day (currentColor becomes separate from the start color).
+//      Ensure they are some minimum distance away.
 // TODO Add advertisement. I need money.
 // TODO Calculate the minimum possible score for the current target color, so we can see
 //      if someone got a perfect score or grade them? It's fine without this, there can
 //      be an "organic" high score on social media. "How many steps did it take you?"
+// TODO Handle holding down the button to increase/decrease faster.
+// TODO "Pressed" button display state and "Unpressed" button display state.
+//      I'm sure there's a standard mechanism.
+// TODO "Hover" button display state as well, possibly. Lower priority, because I expect touch devices more.
 
 const Puzzle = () => {
   const fixedSeed = 0;
@@ -38,25 +40,64 @@ const Puzzle = () => {
     setTargetColor(getRandomColor());
   }, []);
 
-  const addRed = () => setCurrentColor(prev => addColor(prev, { r: 50, g: 0, b: 0 }));
-  const addGreen = () => setCurrentColor(prev => addColor(prev, { r: 0, g: 50, b: 0 }));
-  const addBlue = () => setCurrentColor(prev => addColor(prev, { r: 0, g: 0, b: 50 }));
+  const addWhite = () => setCurrentColor(prev => addColor(prev, { r: 1, g: 1, b: 1 }));
+  const removeWhite = () => setCurrentColor(prev => addColor(prev, { r: -1, g: -1, b: -1 }));
 
-  const removeRed = () => setCurrentColor(prev => addColor(prev, { r: -50, g: 0, b: 0 }));
-  const removeGreen = () => setCurrentColor(prev => addColor(prev, { r: 0, g: -50, b: 0 }));
-  const removeBlue = () => setCurrentColor(prev => addColor(prev, { r: 0, g: 0, b: -50 }));
+  const addRed = () => setCurrentColor(prev => addColor(prev, { r: 1, g: 0, b: 0 }));
+  const addGreen = () => setCurrentColor(prev => addColor(prev, { r: 0, g: 1, b: 0 }));
+  const addBlue = () => setCurrentColor(prev => addColor(prev, { r: 0, g: 0, b: 1 }));
+
+  const removeRed = () => setCurrentColor(prev => addColor(prev, { r: -1, g: 0, b: 0 }));
+  const removeGreen = () => setCurrentColor(prev => addColor(prev, { r: 0, g: -1, b: 0 }));
+  const removeBlue = () => setCurrentColor(prev => addColor(prev, { r: 0, g: 0, b: -1 }));
+
+  // TODO Fix button positionings, make it pretty.
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-stretch gap-1">
       <ColorDisplay targetColor={targetColor} currentColor={currentColor} rgbToString={rgbToString} />
-      <div className="grid grid-cols-3 gap-1">
-        <PaletteButton increase={true} backgroundColor="red" onClick={addRed} />
-        <PaletteButton increase={true} backgroundColor="green" onClick={addGreen} />
-        <PaletteButton increase={true} backgroundColor="blue" onClick={addBlue} />
-        <PaletteButton increase={false} backgroundColor="red" onClick={removeRed} />
-        <PaletteButton increase={false} backgroundColor="green" onClick={removeGreen} />
-        <PaletteButton increase={false} backgroundColor="blue" onClick={removeBlue} />
+      <PaletteButton increase={true} onClick={addWhite} className="
+        bg-game-button-white
+        active:bg-game-button-white-active
+        text-game-button-black
+      " />
+      <div className="grid grid-cols-3 items-center">
+        <PaletteButton increase={true} onClick={addRed} className="
+          bg-game-button-red
+          active:bg-game-button-red-active
+          text-game-button-white
+        "/>
+        <PaletteButton increase={true} onClick={addGreen} className="
+          bg-game-button-green
+          active:bg-game-button-green-active
+          text-game-button-white
+        "/>
+        <PaletteButton increase={true} onClick={addBlue} className="
+          bg-game-button-blue
+          active:bg-game-button-blue-active
+          text-game-button-white
+        "/>
+        <PaletteButton increase={false} onClick={removeRed} className="
+          bg-game-button-red
+          active:bg-game-button-red-active
+          text-game-button-white
+        "/>
+        <PaletteButton increase={false} onClick={removeGreen} className="
+          bg-game-button-green
+          active:bg-game-button-green-active
+          text-game-button-white
+        "/>
+        <PaletteButton increase={false} onClick={removeBlue} className="
+          bg-game-button-blue
+          active:bg-game-button-blue-active
+          text-game-button-white
+        "/>
       </div>
+      <PaletteButton increase={false} onClick={removeWhite} className="
+        bg-game-button-black
+        active:bg-game-button-black-active
+        text-game-button-white
+      " />
     </div>
   );
 };
