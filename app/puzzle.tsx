@@ -54,6 +54,8 @@ const Puzzle = () => {
   const removeGreen = () => { playTurn({ r: 0, g: -1, b: 0 }); };
   const removeBlue = () => { playTurn({ r: 0, g: 0, b: -1 }); };
 
+  // TODO Disable a color button when we can't add/remove any more?
+
   // TODO More similar to wordle, I might expect that we lift the state up
   //   and display a win "card" over the puzzle? Go check out wordle.
   const win = colorsApproxEqual(currentColor, targetColor, 0);
@@ -63,19 +65,15 @@ const Puzzle = () => {
         <ColorDisplay targetColor={targetColor} currentColor={currentColor} score={score} />
         <h1 className="flex justify-center mx-auto">You win!</h1>
         <p className="flex justify-center mx-auto">Score: {score}</p>
-        <div className="flex-col justify-center mx-auto py-2">
+        <div className="flex-col justify-center my-2 border-4 border-slate-800 rounded-lg mx-8">
           {history.map((color, index) => (
-            <div key={index} className="mx-auto justify-center">
+            <div key={index}>
               <div
                 className="mx-auto justify-center"
                 style={{
-                  width: "164px",
+                  width: "100%",
                   height: "3px",
                   backgroundColor: rgbToString(color),
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxSizing: "border-box",
                 }}
               >
               </div>
