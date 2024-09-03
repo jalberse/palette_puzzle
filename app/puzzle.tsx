@@ -106,13 +106,9 @@ const Puzzle = () => {
     );
   }
 
-  // TODO Remove the debug display of the colors.
-
   return (
     <div className="flex-col gap-1 items-center justify-center md:w-1/2 lg:w-1/4 mx-auto">
       <div className="px-8">
-        <p>{rgbToString(targetColor)}</p>
-        <p>{rgbToString(currentColor)}</p>
         <ColorDisplay targetColor={targetColor} currentColor={currentColor} score={score} />
         <PaletteButton increase={true} onClick={addWhite} className="
           bg-game-button-white
