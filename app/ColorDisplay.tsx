@@ -27,6 +27,9 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
   // Scale from 1em to 3em.
   const textSize = 1 + (2 * (1 - distanceRatio));
 
+  // TODO Consider a ring around the target color div too. Just for a little visual interest...
+  //      Tailwind ring, with a little separation.
+
   return (
     <div className="aspect-square m-1 my-3">
       <div

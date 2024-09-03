@@ -1,4 +1,5 @@
 import Puzzle from "./puzzle";
+import Header from "./header";
 
 export default function Game() {
 
@@ -41,7 +42,7 @@ export default function Game() {
 
   return (
     <div>
-      <h1 className="text-center">Palette Puzzle</h1>
+      <Header />
       <Puzzle />
     </div>
   );
