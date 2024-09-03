@@ -3,16 +3,23 @@ import Header from "./header";
 
 export default function Game() {
 
-  // TODO Have some instructions on how to play. Accessible from a menu.
-  //      Also should show up on the first time the game is played, cached in browser.
-  //      Probably just display as a pop-up card thing. Not a literal pop-up.
+  // TODO Have the help menu show up by default on first load,
+  //      but only when the help icon is clicked on later visits.
+
+  // TODO Make the target and end colors change daily rather than randomly generating them on load.
+  //      The extremely dumb way is to hard-code that and then redeploy a change each day changing the color.
+  //      The less dumb way is to set up a basic database that stores the colors, and a cron job.
+  //        That also sets us up for other database stuff later (multiple games being the obvious),
+  //        track history, and lets us put the DB and cron job stuff on the resume line.
+  // So... switch to a DB to store the target color and the end color: https://vercel.com/docs/storage/vercel-postgres/quickstart
+  // And then set up a cron job to change the target color and end color daily: https://vercel.com/docs/solutions/vercel-cron-jobs
+  // And of course set up our frontend to pull from there rather than randomly generating them.
 
   // TODO Different modes.
   // RGB (Additive) - the one we're starting with.
   // CMYK (Subtractive)
   // RYB (Subtractive) https://github.com/camme/ryb-color-mixer?tab=readme-ov-file 
   // Gradients (Start and End) (?)
-
   // Hmm. https://stackoverflow.com/questions/14819058/mixing-two-colors-naturally-in-javascript
   // And well, CMYK and RYB mixing are both just subtractive models - we shouldn't care about
   //   what the primary colors are.
@@ -31,14 +38,6 @@ export default function Game() {
   // TODO Top right: A button like "Subscribe to Games" but that takes us to Reference Rover's site.
   //      We'll have a permanent advertisement to our main product.
   //      I'll need to actually release Reference Rover though, which will come after this release.
-
-  // TODO Pick a good font. The one we have is ugly on everything.
-  //      Could use a Chevy Ray font?
-  // https://nextjs.org/docs/pages/building-your-application/optimizing/fonts#local-fonts
-  
-
-  // TODO Let's work on the header in the new headere.tsx file.
-  //  Header component let's go...
 
   return (
     <div>

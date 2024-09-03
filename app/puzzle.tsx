@@ -16,12 +16,6 @@ import PaletteButton from './PaletteButton';
 //      if someone got a perfect score or grade them? It's fine without this, there can
 //      be an "organic" high score on social media. "How many steps did it take you?"
 
-// TODO Make steps smaller if you're closer. 1 at minimum, maybe log: 1, 2, 4, 8, 16, 32?
-//       If the larger step would make you overstep, use the next smaller one?
-// TODO Handle holding down the button to increase/decrease faster.
-//      Though, maybe we instead do the "smaller step if you're closer" thing.
-//      That way, you still just do single clicks but we get rid of click spamming when we know we just want a bunch of blue etc.
-
 const Puzzle = () => {
   const fixedSeed = 0;
 

@@ -32,7 +32,7 @@ const Help: React.FC<{ handleHelpClose: () => void }> = ({ handleHelpClose }) =>
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-lg flex flex-col mx-4 overflow-y-auto">
-        <h2 className="text-lg font-bold mb-4 text-center">Help</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Help</h2>
         <div className="flex-col">
           <ColorDisplay
             targetColor={targetColor}
@@ -45,7 +45,7 @@ const Help: React.FC<{ handleHelpClose: () => void }> = ({ handleHelpClose }) =>
           <li>Match the target color in the outer ring.</li>
           <li>Minimize your score.</li>
         </ol>
-        <p className="text-center my-2">New puzzles daily!</p>
+        <p className="text-center my-2 text-lg">New puzzles daily!</p>
         <div className="flex justify-end">
           <button
             onClick={handleHelpClose}
