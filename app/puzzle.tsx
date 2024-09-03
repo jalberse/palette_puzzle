@@ -75,11 +75,8 @@ const Puzzle = () => {
 
   // TODO We want a black outline on the white button.
   
-  // TODO Delete the target and current, just using for debugging.
-  // TODO Fix button positionings, make it pretty.
-  //      I tried square buttons but they took up too much real-estate, I think?
   return (
-    <div className="flex-col gap-1 items-center justify-center md:w-1/3">
+    <div className="flex-col gap-1 items-center justify-center md:w-1/2 lg:w-1/4 mx-auto">
       <h1 className="items-center text-4xl font-bold text-center">{score}</h1>
       <ColorDisplay targetColor={targetColor} currentColor={currentColor} />
       <div className="px-8">
