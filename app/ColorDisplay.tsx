@@ -42,6 +42,7 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
         }}
       >
         <div
+          className="align-middle"
           style={{
             width: "70%",
             height: "70%",
@@ -54,7 +55,7 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
             justifyContent: "center",
           }}
         >
-          <div style={{ fontSize: `${textSize}em` }}>{score}</div>
+          <div className="mt-2" style={{ fontSize: `${textSize}em` }}>{score}</div>
         </div>
       </div>
     </div>

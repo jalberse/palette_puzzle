@@ -31,6 +31,14 @@ export default function Game() {
   //      We'll have a permanent advertisement to our main product.
   //      I'll need to actually release Reference Rover though, which will come after this release.
 
+  // TODO Pick a good font. The one we have is ugly on everything.
+  //      Could use a Chevy Ray font?
+  // https://nextjs.org/docs/pages/building-your-application/optimizing/fonts#local-fonts
+  
+
+  // TODO Let's work on the header in the new headere.tsx file.
+  //  Header component let's go...
+
   return (
     <div>
       <h1 className="text-center">Palette Puzzle</h1>
