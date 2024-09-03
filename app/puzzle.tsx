@@ -66,7 +66,7 @@ const Puzzle = () => {
   if (win) {
     return (
       <div>
-        <ColorDisplay targetColor={targetColor} currentColor={currentColor} rgbToString={rgbToString} />
+        <ColorDisplay targetColor={targetColor} currentColor={currentColor} />
         <h1>You win!</h1>
         <p>Score: {score}</p>
       </div>
@@ -80,7 +80,7 @@ const Puzzle = () => {
   return (
     <div className="flex flex-col gap-1 content-center md:w-1/3">
       <h1 className="items-center text-4xl font-bold">{score}</h1>
-      <ColorDisplay targetColor={targetColor} currentColor={currentColor} rgbToString={rgbToString} />
+      <ColorDisplay targetColor={targetColor} currentColor={currentColor} />
       <p>Target: {rgbToString(targetColor)}</p>
       <p>Current: {rgbToString(currentColor)}</p>
       <PaletteButton increase={true} onClick={addWhite} className="
