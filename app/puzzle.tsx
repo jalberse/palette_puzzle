@@ -64,6 +64,7 @@ const Puzzle = () => {
   if (win) {
     return (
       <div>
+        <ColorDisplay targetColor={targetColor} currentColor={currentColor} rgbToString={rgbToString} />
         <h1>You win!</h1>
         <p>Score: {score}</p>
       </div>

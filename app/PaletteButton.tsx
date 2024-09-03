@@ -18,6 +18,7 @@ const PaletteButton: React.FC<PaletteButtonProps> = ({
       className={
         "rounded-md " +
         "text-2xl " +
+        "m-1 " +
         className
       }
       >

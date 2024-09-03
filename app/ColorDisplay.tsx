@@ -1,4 +1,6 @@
 import React from 'react';
+import { colorDistance } from './rgb';
+import { exponential01 } from './math';
 
 interface ColorDisplayProps {
   targetColor: { r: number; g: number; b: number };
@@ -7,17 +9,26 @@ interface ColorDisplayProps {
 }
 
 const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, rgbToString }) => {
-  
-  // TODO Consider having the gap between the elements shrink as we approach the target
-  //      color, so that they *just* touch when the colors are equal (but not until then).
-  
-  // TODO And consider tailwind classes...
+  const distance = colorDistance(targetColor, currentColor);
+  const distanceRatio = distance / 441.673;
+
+  // At distanceRatio === 1, we want the border to be 20px.
+  // At distanceRatio === 0, we want the border to be 0px.
+  // In between, there should be a logarithmic relationship.
+  var borderWidth = distance === 0 
+    ? 0
+    : Math.max(1, exponential01(distanceRatio, 1.5) * 50);
+  if (isNaN(borderWidth)) {
+    borderWidth = 0;
+  }
 
   return (
     <div className="mb-4">
+      <p>{distanceRatio}</p>
+      <>{distance}</>
       <div
         style={{
-          width: "90%px",
+          width: "100%",
           height: "150px",
           backgroundColor: rgbToString(targetColor),
           display: "flex",
@@ -35,8 +46,7 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
               height: "100px",
               backgroundColor: rgbToString(currentColor),
               borderRadius: "50%",
-              margin: "10px",
-              border: "5px solid white",
+              border: `${borderWidth}px solid white`,
               color: "white",
             }}
           ></div>

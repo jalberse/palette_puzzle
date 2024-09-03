@@ -27,7 +27,6 @@ export function colorDistance(a: RGBColor, b: RGBColor) {
   );
 }
 
-
 export function getRandomColor() {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
