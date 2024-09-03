@@ -32,14 +32,28 @@ const Puzzle = () => {
 
   // Note that [] as the second argument means that this effect will only run once on Mount.
   useEffect(() => {
-    // setCurrentColor({ r: 255, g: 255, b: 255 });
-    // setTargetColor({ r: 0, g: 0, b: 0 });
     setCurrentColor(getRandomColor());
     setTargetColor(getRandomColor());
   }, []);
 
   function playTurn(colorChange: RGBColor) {
-    const nextColor = addColor(currentColor, colorChange);
+    const stepSizes = [8, 4, 2, 1];
+
+    const adjustColorComponent = (current: number, target: number, change: number) => {
+      if (change === 0) {
+        return current;
+      }
+      let distance = Math.abs(target - current);
+      let step = stepSizes.find(size => size < distance) || 1;
+      return current + Math.sign(change) * step;
+    };
+
+    const nextColor = {
+      r: adjustColorComponent(currentColor.r, targetColor.r, colorChange.r),
+      g: adjustColorComponent(currentColor.g, targetColor.g, colorChange.g),
+      b: adjustColorComponent(currentColor.b, targetColor.b, colorChange.b),
+    };
+
     setHistory([...history, nextColor]);
     setCurrentColor(nextColor);
     setScore(prev => prev + 1);
@@ -59,7 +73,7 @@ const Puzzle = () => {
   // TODO More similar to wordle, I might expect that we lift the state up
   //   and display a win "card" over the puzzle? Go check out wordle.
   
-  // TODO I think that when we add/remove a color, we should jump by 664, 32, 16, 8, 4, 2, 1.
+  // TODO I think that when we add/remove a color, we should jump by 64, 32, 16, 8, 4, 2, 1.
   //      If adding that much would cause us to equal or jump past the target,
   //      then we do the smaller jump (until we get to 1, obviously).
   //      That way you quickly get to approximately the right answer, but need to
@@ -68,8 +82,9 @@ const Puzzle = () => {
   // TODO Display time
   // TODO Display another gradient with the "minimum path" to the target?
   //      So they can compare (and if it's very off, maybe they laugh and share it).
-  // TODO Indicate new puzzle in X time.
+  // TODO Indicate new puzzle in X time to match our daily reset
   const win = colorsApproxEqual(currentColor, targetColor, 1);
+  // TODO Consider displaying this as a dialog/card instead, just over everything? That's how wordle does it.
   if (win) {
     // Note that we send the target color for both, to ensure they match
     // even if they user has only gotten an approximate match.
@@ -85,7 +100,7 @@ const Puzzle = () => {
                 className="mx-auto justify-center"
                 style={{
                   width: "100%",
-                  height: "3px",
+                  height: "15px",
                   backgroundColor: rgbToString(color),
                 }}
               >
@@ -97,8 +112,7 @@ const Puzzle = () => {
     );
   }
 
-  // TODO I think we're too strict on match. Go up to 2 or something?
-  //      It's gotten frustrating.
+  // TODO Remove the debug display of the colors.
 
   return (
     <div className="flex-col gap-1 items-center justify-center md:w-1/2 lg:w-1/4 mx-auto">
