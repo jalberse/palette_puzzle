@@ -73,8 +73,6 @@ const Puzzle = () => {
     );
   }
 
-  // TODO We want a black outline on the white button.
-  
   return (
     <div className="flex-col gap-1 items-center justify-center md:w-1/2 lg:w-1/4 mx-auto">
       <h1 className="items-center text-4xl font-bold text-center">{score}</h1>
@@ -84,6 +82,8 @@ const Puzzle = () => {
           bg-game-button-white
           active:bg-game-button-white-active
           text-game-button-black
+          border-game-button-black
+          border-2
           w-full
         "/>
         <div className="grid grid-cols-3 items-center">
