@@ -73,12 +73,6 @@ const Puzzle = () => {
   // TODO More similar to wordle, I might expect that we lift the state up
   //   and display a win "card" over the puzzle? Go check out wordle.
   
-  // TODO I think that when we add/remove a color, we should jump by 64, 32, 16, 8, 4, 2, 1.
-  //      If adding that much would cause us to equal or jump past the target,
-  //      then we do the smaller jump (until we get to 1, obviously).
-  //      That way you quickly get to approximately the right answer, but need to
-  //      but need to be more precise to get the exact answer.
-  
   // TODO Display time
   // TODO Display another gradient with the "minimum path" to the target?
   //      So they can compare (and if it's very off, maybe they laugh and share it).
