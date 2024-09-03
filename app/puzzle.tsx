@@ -58,11 +58,24 @@ const Puzzle = () => {
 
   // TODO More similar to wordle, I might expect that we lift the state up
   //   and display a win "card" over the puzzle? Go check out wordle.
-  const win = colorsApproxEqual(currentColor, targetColor, 0);
+  
+  // TODO I think that when we add/remove a color, we should jump by 664, 32, 16, 8, 4, 2, 1.
+  //      If adding that much would cause us to equal or jump past the target,
+  //      then we do the smaller jump (until we get to 1, obviously).
+  //      That way you quickly get to approximately the right answer, but need to
+  //      but need to be more precise to get the exact answer.
+  
+  // TODO Display time
+  // TODO Display another gradient with the "minimum path" to the target?
+  //      So they can compare (and if it's very off, maybe they laugh and share it).
+  // TODO Indicate new puzzle in X time.
+  const win = colorsApproxEqual(currentColor, targetColor, 1);
   if (win) {
+    // Note that we send the target color for both, to ensure they match
+    // even if they user has only gotten an approximate match.
     return (
       <div className="px-8 md:w-1/2 lg:w-1/4 mx-auto">
-        <ColorDisplay targetColor={targetColor} currentColor={currentColor} score={score} />
+        <ColorDisplay targetColor={targetColor} currentColor={targetColor} score={score} />
         <h1 className="flex justify-center mx-auto">You win!</h1>
         <p className="flex justify-center mx-auto">Score: {score}</p>
         <div className="flex-col justify-center my-2 border-4 border-slate-800 rounded-lg mx-8">
@@ -84,20 +97,15 @@ const Puzzle = () => {
     );
   }
 
-  // TODO Make the score prettier - possibly as text within the circle.
-  //      Legitbility is a concern there. It can be on *any* color.
-  //       Invert color?
-  //       Outline text?
-  // TODO Remove color string display, just for debugging.
   // TODO I think we're too strict on match. Go up to 2 or something?
   //      It's gotten frustrating.
 
   return (
     <div className="flex-col gap-1 items-center justify-center md:w-1/2 lg:w-1/4 mx-auto">
       <div className="px-8">
-        <ColorDisplay targetColor={targetColor} currentColor={currentColor} score={score} />
-        <p>{rgbToString(currentColor)}</p>
         <p>{rgbToString(targetColor)}</p>
+        <p>{rgbToString(currentColor)}</p>
+        <ColorDisplay targetColor={targetColor} currentColor={currentColor} score={score} />
         <PaletteButton increase={true} onClick={addWhite} className="
           bg-game-button-white
           active:bg-game-button-white-active
