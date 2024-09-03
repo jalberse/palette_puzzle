@@ -22,9 +22,18 @@ export default function Game() {
   //      Though since idk about the exact mixing models, maybe we want to just ensure there's some accuracy
   //        threshold to avoid rounding issues.
 
+  // TODO Top bar - reference wordle. Below are all elements of that.
+  // TODO Center: nice logo. Palette Puzzle.
+  // TODO Right: a (?) button that shows the instructions in a dialog.
+  // TODO Right: a settings button/icon that shows a settings dialog (I guess we'd want a dark mode etc...)
+  // TODO top left - Hamburger menu in the - switch puzzles (RGB, CMYK, RYB)
+  // TODO Top right: A button like "Subscribe to Games" but that takes us to Reference Rover's site.
+  //      We'll have a permanent advertisement to our main product.
+  //      I'll need to actually release Reference Rover though, which will come after this release.
+
   return (
     <div>
-      <h1>Palette Puzzle</h1>
+      <h1 className="text-center">Palette Puzzle</h1>
       <Puzzle />
     </div>
   );

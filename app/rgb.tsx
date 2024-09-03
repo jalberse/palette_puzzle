@@ -41,8 +41,8 @@ export function rgbToString(color: RGBColor) {
 
 export function addColor(color: RGBColor, amount: RGBColor) {
   return {
-    r: Math.min(color.r + amount.r, 255),
-    g: Math.min(color.g + amount.g, 255),
-    b: Math.min(color.b + amount.b, 255),
+    r: Math.max(0, Math.min(color.r + amount.r, 255)),
+    g: Math.max(0, Math.min(color.g + amount.g, 255)),
+    b: Math.max(0, Math.min(color.b + amount.b, 255)),
   };
 }

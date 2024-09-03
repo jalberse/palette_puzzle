@@ -14,17 +14,20 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
 
   var borderWidth = distance === 0 
     ? 0
-    : Math.max(1, exponential01(distanceRatio, 1.5) * 50);
+    : Math.max(1, exponential01(distanceRatio, 1.5) * 90);
   if (isNaN(borderWidth)) {
     borderWidth = 0;
   }
 
+  // TODO Make the inner circle display larger.
+  ///     That also means we can probably play with the border width interpolation more.
+
   return (
-    <div className="mb-4">
+    <div className="aspect-square">
       <div
         style={{
           width: "100%",
-          height: "150px",
+          height: "100%",
           backgroundColor: rgbToString(targetColor),
           display: "flex",
           alignItems: "center",
@@ -34,18 +37,16 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
           borderRadius: "10px",
         }}
       >
-        <div className="root">
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              backgroundColor: rgbToString(currentColor),
-              borderRadius: "50%",
-              border: `${borderWidth}px solid white`,
-              color: "white",
-            }}
-          ></div>
-        </div>
+        <div
+          style={{
+            width: "70%",
+            height: "70%",
+            backgroundColor: rgbToString(currentColor),
+            borderRadius: "50%",
+            border: `${borderWidth}px solid white`,
+            color: "white",
+          }}
+        ></div>
       </div>
     </div>
   );

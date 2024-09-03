@@ -38,6 +38,8 @@ const Puzzle = () => {
 
   // Note that [] as the second argument means that this effect will only run once on Mount.
   useEffect(() => {
+    // setCurrentColor({ r: 255, g: 255, b: 255 });
+    // setTargetColor({ r: 0, g: 0, b: 0 });
     setCurrentColor(getRandomColor());
     setTargetColor(getRandomColor());
   }, []);
@@ -70,11 +72,13 @@ const Puzzle = () => {
       </div>
     );
   }
+
+  // TODO We want a black outline on the white button.
   
   // TODO Delete the target and current, just using for debugging.
   // TODO Fix button positionings, make it pretty.
   return (
-    <div className="flex flex-col items-stretch gap-1">
+    <div className="flex flex-col gap-1 content-center md:w-1/3">
       <h1 className="items-center text-4xl font-bold">{score}</h1>
       <ColorDisplay targetColor={targetColor} currentColor={currentColor} rgbToString={rgbToString} />
       <p>Target: {rgbToString(targetColor)}</p>
