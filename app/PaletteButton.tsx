@@ -20,6 +20,7 @@ const PaletteButton: React.FC<PaletteButtonProps> = ({
         rounded-md
         text-2xl
         w-full
+        h-12
         ${className}`}
         >
       {increase ? '+' : '-'}
