@@ -30,7 +30,7 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor }
           alignItems: "center",
           justifyContent: "center",
           boxSizing: "border-box",
-          borderRadius: "35%",
+          borderRadius: "50%",
         }}
       >
         <div

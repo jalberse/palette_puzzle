@@ -56,10 +56,10 @@ const Puzzle = () => {
 
   // TODO More similar to wordle, I might expect that we lift the state up
   //   and display a win "card" over the puzzle? Go check out wordle.
-  const win = colorsApproxEqual(currentColor, targetColor, 0);
+  const win = colorsApproxEqual(currentColor, targetColor, 1);
   if (win) {
     return (
-      <div>
+      <div className="px-8">
         <ColorDisplay targetColor={targetColor} currentColor={currentColor} />
         <h1>You win!</h1>
         <p>Score: {score}</p>
@@ -67,13 +67,21 @@ const Puzzle = () => {
     );
   }
 
-  // TODO Make the score prettier.
+  // TODO Make the score prettier - possibly as text within the circle.
+  //      Legitbility is a concern there. It can be on *any* color.
+  //       Invert color?
+  //       Outline text?
+  // TODO Remove color string display, just for debugging.
+  // TODO I think we're too strict on match. Go up to 2 or something?
+  //      It's gotten frustrating.
 
   return (
     <div className="flex-col gap-1 items-center justify-center md:w-1/2 lg:w-1/4 mx-auto">
       <h1 className="items-center text-4xl font-bold text-center">{score}</h1>
       <div className="px-8">
         <ColorDisplay targetColor={targetColor} currentColor={currentColor} />
+        <p>{rgbToString(currentColor)}</p>
+        <p>{rgbToString(targetColor)}</p>
         <PaletteButton increase={true} onClick={addWhite} className="
           bg-game-button-white
           active:bg-game-button-white-active
