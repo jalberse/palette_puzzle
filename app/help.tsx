@@ -40,10 +40,10 @@ const Help: React.FC<{ handleHelpClose: () => void }> = ({ handleHelpClose }) =>
             score={currentIndex}
           />
         </div>
-        <ol className="list-decimal list-inside">
-          <li>Tap the buttons to add or remove colors.</li>
-          <li>Match the target color in the outer ring.</li>
-          <li>Minimize your score.</li>
+        <ol className="list-decimal list-inside mx-8">
+          <li>Tap to add or remove color to the center.</li>
+          <li>Match the goal color in the outer ring.</li>
+          <li>Minimize your score!</li>
         </ol>
         <p className="text-center my-2 text-lg">New puzzles daily!</p>
         <div className="flex justify-end">
