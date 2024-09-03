@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from 'next/font/local';
 
-const columnFont = localFont({ src: "./fonts/Column.ttf" });
+const thicketFont = localFont({ src: "./fonts/Thicket.ttf" });
 
 export const metadata: Metadata = {
   title: "Palette Puzzle",
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={columnFont.className}>{children}</body>
+      <body className={thicketFont.className}>{children}</body>
     </html>
   );
 }
