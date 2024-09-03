@@ -5,28 +5,22 @@ import { addColor, colorsApproxEqual, colorsEqual, getRandomColor, RGBColor, rgb
 import ColorDisplay from './ColorDisplay';
 import PaletteButton from './PaletteButton';
 
-// TODO A white button and a black button that adds/subtracts all elements equally to just
-//      get brighter or darker.
-// TODO Display the current score; the number of times any of the buttons has been clicked.
-// TODO Make steps smaller if you're closer. 1 at minimum, maybe log: 1, 2, 4, 8, 16, 32?
-//       If the larger step would make you overstep, use the next smaller one?
 // TODO Add a timer. wordle does similarly. Score and time.
-// TODO Different mixing models? This is a literal RGB. HSL? CMYK?
-//      A "paint-like" model based on some subtractive color model?
-//      I think that having 3 different "puzzles" for RGB, HSL, and CMYK would be a good
-//      starting point. Then we can expand into other stuff later too.
-// TODO e.g. we could make another puzzle that's the same, but you're matching two *gradients*.
-//      So you need to match the start and the end color. That could be interesting.
+
 // TODO Generate a new start and target color each day (currentColor becomes separate from the start color).
 //      Ensure they are some minimum distance away.
+
 // TODO Add advertisement. I need money.
+
 // TODO Calculate the minimum possible score for the current target color, so we can see
 //      if someone got a perfect score or grade them? It's fine without this, there can
 //      be an "organic" high score on social media. "How many steps did it take you?"
+
+// TODO Make steps smaller if you're closer. 1 at minimum, maybe log: 1, 2, 4, 8, 16, 32?
+//       If the larger step would make you overstep, use the next smaller one?
 // TODO Handle holding down the button to increase/decrease faster.
-// TODO "Pressed" button display state and "Unpressed" button display state.
-//      I'm sure there's a standard mechanism.
-// TODO "Hover" button display state as well, possibly. Lower priority, because I expect touch devices more.
+//      Though, maybe we instead do the "smaller step if you're closer" thing.
+//      That way, you still just do single clicks but we get rid of click spamming when we know we just want a bunch of blue etc.
 
 const Puzzle = () => {
   const fixedSeed = 0;
@@ -73,11 +67,13 @@ const Puzzle = () => {
     );
   }
 
+  // TODO Make the score prettier.
+
   return (
     <div className="flex-col gap-1 items-center justify-center md:w-1/2 lg:w-1/4 mx-auto">
       <h1 className="items-center text-4xl font-bold text-center">{score}</h1>
-      <ColorDisplay targetColor={targetColor} currentColor={currentColor} />
       <div className="px-8">
+        <ColorDisplay targetColor={targetColor} currentColor={currentColor} />
         <PaletteButton increase={true} onClick={addWhite} className="
           bg-game-button-white
           active:bg-game-button-white-active

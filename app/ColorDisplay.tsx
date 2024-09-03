@@ -20,7 +20,7 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor }
   }
 
   return (
-    <div className="aspect-square m-4">
+    <div className="aspect-square m-1 my-3">
       <div
         style={{
           width: "100%",
@@ -30,8 +30,7 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor }
           alignItems: "center",
           justifyContent: "center",
           boxSizing: "border-box",
-          border: "5px solid white",
-          borderRadius: "10px",
+          borderRadius: "35%",
         }}
       >
         <div
