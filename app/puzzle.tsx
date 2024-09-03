@@ -77,54 +77,57 @@ const Puzzle = () => {
   
   // TODO Delete the target and current, just using for debugging.
   // TODO Fix button positionings, make it pretty.
+  //      I tried square buttons but they took up too much real-estate, I think?
   return (
-    <div className="flex flex-col gap-1 content-center md:w-1/3">
-      <h1 className="items-center text-4xl font-bold">{score}</h1>
+    <div className="flex-col gap-1 items-center justify-center md:w-1/3">
+      <h1 className="items-center text-4xl font-bold text-center">{score}</h1>
       <ColorDisplay targetColor={targetColor} currentColor={currentColor} />
-      <p>Target: {rgbToString(targetColor)}</p>
-      <p>Current: {rgbToString(currentColor)}</p>
-      <PaletteButton increase={true} onClick={addWhite} className="
-        bg-game-button-white
-        active:bg-game-button-white-active
-        text-game-button-black
-      " />
-      <div className="grid grid-cols-3 items-center">
-        <PaletteButton increase={true} onClick={addRed} className="
-          bg-game-button-red
-          active:bg-game-button-red-active
-          text-game-button-white
+      <div className="px-8">
+        <PaletteButton increase={true} onClick={addWhite} className="
+          bg-game-button-white
+          active:bg-game-button-white-active
+          text-game-button-black
+          w-full
         "/>
-        <PaletteButton increase={true} onClick={addGreen} className="
-          bg-game-button-green
-          active:bg-game-button-green-active
+        <div className="grid grid-cols-3 items-center">
+          <PaletteButton increase={true} onClick={addRed} className="
+            bg-game-button-red
+            active:bg-game-button-red-active
+            text-game-button-white
+          "/>
+          <PaletteButton increase={true} onClick={addGreen} className="
+            bg-game-button-green
+            active:bg-game-button-green-active
+            text-game-button-white
+          "/>
+          <PaletteButton increase={true} onClick={addBlue} className="
+            bg-game-button-blue
+            active:bg-game-button-blue-active
+            text-game-button-white
+          "/>
+          <PaletteButton increase={false} onClick={removeRed} className="
+            bg-game-button-red
+            active:bg-game-button-red-active
+            text-game-button-white
+          "/>
+          <PaletteButton increase={false} onClick={removeGreen} className="
+            bg-game-button-green
+            active:bg-game-button-green-active
+            text-game-button-white
+          "/>
+          <PaletteButton increase={false} onClick={removeBlue} className="
+            bg-game-button-blue
+            active:bg-game-button-blue-active
+            text-game-button-white
+          "/>
+        </div>
+        <PaletteButton increase={false} onClick={removeWhite} className="
+          bg-game-button-black
+          active:bg-game-button-black-active
           text-game-button-white
-        "/>
-        <PaletteButton increase={true} onClick={addBlue} className="
-          bg-game-button-blue
-          active:bg-game-button-blue-active
-          text-game-button-white
-        "/>
-        <PaletteButton increase={false} onClick={removeRed} className="
-          bg-game-button-red
-          active:bg-game-button-red-active
-          text-game-button-white
-        "/>
-        <PaletteButton increase={false} onClick={removeGreen} className="
-          bg-game-button-green
-          active:bg-game-button-green-active
-          text-game-button-white
-        "/>
-        <PaletteButton increase={false} onClick={removeBlue} className="
-          bg-game-button-blue
-          active:bg-game-button-blue-active
-          text-game-button-white
-        "/>
+          w-full
+        " />
       </div>
-      <PaletteButton increase={false} onClick={removeWhite} className="
-        bg-game-button-black
-        active:bg-game-button-black-active
-        text-game-button-white
-      " />
     </div>
   );
 };

@@ -20,7 +20,7 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor }
   }
 
   return (
-    <div className="aspect-square">
+    <div className="aspect-square m-4">
       <div
         style={{
           width: "100%",

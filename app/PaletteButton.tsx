@@ -12,18 +12,19 @@ const PaletteButton: React.FC<PaletteButtonProps> = ({
   onClick,
 }) => {
   return (
+    <div className="m-1">
     <button
       onClick={onClick} 
       type="button"
-      className={
-        "rounded-md " +
-        "text-2xl " +
-        "m-1 " +
-        className
-      }
-      >
-        {increase ? '+' : '-'}
-      </button>
+      className={`
+        rounded-md
+        text-2xl
+        w-full
+        ${className}`}
+        >
+      {increase ? '+' : '-'}
+    </button>
+    </div>
   );
 };
 
