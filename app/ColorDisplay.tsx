@@ -12,9 +12,6 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
   const distance = colorDistance(targetColor, currentColor);
   const distanceRatio = distance / 441.673;
 
-  // At distanceRatio === 1, we want the border to be 20px.
-  // At distanceRatio === 0, we want the border to be 0px.
-  // In between, there should be a logarithmic relationship.
   var borderWidth = distance === 0 
     ? 0
     : Math.max(1, exponential01(distanceRatio, 1.5) * 50);
