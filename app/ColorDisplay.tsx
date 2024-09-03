@@ -1,14 +1,15 @@
 import React from 'react';
 import { colorDistance, RGBColor } from './rgb';
 import { exponential01 } from './math';
-import { rgbToString } from './rgb';
+import { rgbToString, contrastColor } from './rgb';
 
 interface ColorDisplayProps {
   targetColor: RGBColor;
   currentColor: RGBColor;
+  score: number;
 }
 
-const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor }) => {
+const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, score }) => {
   const distance = colorDistance(targetColor, currentColor);
   const distanceRatio = distance / 441.673;
 
@@ -18,6 +19,13 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor }
   if (isNaN(borderWidth)) {
     borderWidth = 0;
   }
+
+  const textColor = contrastColor(currentColor);
+
+  // Calculate the text size based on the distance. Lower distance
+  // means larger text and vice-versa.
+  // Scale from 1em to 3em.
+  const textSize = 1 + (2 * (1 - distanceRatio));
 
   return (
     <div className="aspect-square m-1 my-3">
@@ -40,9 +48,14 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor }
             backgroundColor: rgbToString(currentColor),
             borderRadius: "50%", // This makes the circle.
             border: `${borderWidth}px solid white`,
-            color: "white",
+            color: rgbToString(textColor),
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
-        ></div>
+        >
+          <div style={{ fontSize: `${textSize}em` }}>{score}</div>
+        </div>
       </div>
     </div>
   );

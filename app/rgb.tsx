@@ -20,6 +20,21 @@ export function colorsApproxEqual(a: RGBColor, b: RGBColor, tolerance: number) {
   );
 }
 
+export function contrastColor(color: RGBColor): RGBColor {
+  let d = 0;
+
+  // Counting the perceptive luminance - human eye favors green color...
+  const luminance = (0.299 * color.r + 0.587 * color.g + 0.114 * color.b) / 255;
+
+  if (luminance > 0.5) {
+    d = 0; // bright colors - black font
+  } else {
+    d = 255; // dark colors - white font
+  }
+
+  return { r: d, g: d, b: d };
+}
+
 // Get the euclidian distance between two colors
 export function colorDistance(a: RGBColor, b: RGBColor) {
   return Math.sqrt(

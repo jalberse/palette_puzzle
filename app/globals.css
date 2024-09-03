@@ -17,3 +17,12 @@ body {
     text-wrap: balance;
   }
 }
+
+inverted-text {
+  background: inherit;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: invert(1) grayscale(1);
+  -webkit-filter: invert(1) grayscale(1);
+}

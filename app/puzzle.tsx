@@ -56,13 +56,32 @@ const Puzzle = () => {
 
   // TODO More similar to wordle, I might expect that we lift the state up
   //   and display a win "card" over the puzzle? Go check out wordle.
-  const win = colorsApproxEqual(currentColor, targetColor, 1);
+  const win = colorsApproxEqual(currentColor, targetColor, 0);
   if (win) {
     return (
-      <div className="px-8">
-        <ColorDisplay targetColor={targetColor} currentColor={currentColor} />
-        <h1>You win!</h1>
-        <p>Score: {score}</p>
+      <div className="px-8 md:w-1/2 lg:w-1/4 mx-auto">
+        <ColorDisplay targetColor={targetColor} currentColor={currentColor} score={score} />
+        <h1 className="flex justify-center mx-auto">You win!</h1>
+        <p className="flex justify-center mx-auto">Score: {score}</p>
+        <div className="flex-col justify-center mx-auto py-2">
+          {history.map((color, index) => (
+            <div key={index} className="mx-auto justify-center">
+              <div
+                className="mx-auto justify-center"
+                style={{
+                  width: "164px",
+                  height: "3px",
+                  backgroundColor: rgbToString(color),
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxSizing: "border-box",
+                }}
+              >
+              </div>
+            </div>
+          ))}
+          </div>
       </div>
     );
   }
@@ -77,9 +96,8 @@ const Puzzle = () => {
 
   return (
     <div className="flex-col gap-1 items-center justify-center md:w-1/2 lg:w-1/4 mx-auto">
-      <h1 className="items-center text-4xl font-bold text-center">{score}</h1>
       <div className="px-8">
-        <ColorDisplay targetColor={targetColor} currentColor={currentColor} />
+        <ColorDisplay targetColor={targetColor} currentColor={currentColor} score={score} />
         <p>{rgbToString(currentColor)}</p>
         <p>{rgbToString(targetColor)}</p>
         <PaletteButton increase={true} onClick={addWhite} className="
