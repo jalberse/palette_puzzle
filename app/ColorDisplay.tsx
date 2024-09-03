@@ -1,11 +1,11 @@
 import React from 'react';
-import { colorDistance } from './rgb';
+import { colorDistance, RGBColor } from './rgb';
 import { exponential01 } from './math';
 import { rgbToString } from './rgb';
 
 interface ColorDisplayProps {
-  targetColor: { r: number; g: number; b: number };
-  currentColor: { r: number; g: number; b: number };
+  targetColor: RGBColor;
+  currentColor: RGBColor;
 }
 
 const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor }) => {
