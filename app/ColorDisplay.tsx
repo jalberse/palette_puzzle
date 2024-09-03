@@ -1,14 +1,14 @@
 import React from 'react';
 import { colorDistance } from './rgb';
 import { exponential01 } from './math';
+import { rgbToString } from './rgb';
 
 interface ColorDisplayProps {
   targetColor: { r: number; g: number; b: number };
   currentColor: { r: number; g: number; b: number };
-  rgbToString: (color: { r: number; g: number; b: number }) => string;
 }
 
-const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, rgbToString }) => {
+const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor }) => {
   const distance = colorDistance(targetColor, currentColor);
   const distanceRatio = distance / 441.673;
 
@@ -18,9 +18,6 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
   if (isNaN(borderWidth)) {
     borderWidth = 0;
   }
-
-  // TODO Make the inner circle display larger.
-  ///     That also means we can probably play with the border width interpolation more.
 
   return (
     <div className="aspect-square">
@@ -42,7 +39,7 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
             width: "70%",
             height: "70%",
             backgroundColor: rgbToString(currentColor),
-            borderRadius: "50%",
+            borderRadius: "50%", // This makes the circle.
             border: `${borderWidth}px solid white`,
             color: "white",
           }}
