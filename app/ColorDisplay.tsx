@@ -21,8 +21,6 @@ const ColorDisplay: React.FC<ColorDisplayProps> = ({ targetColor, currentColor, 
 
   return (
     <div className="mb-4">
-      <p>{distanceRatio}</p>
-      <>{distance}</>
       <div
         style={{
           width: "100%",
