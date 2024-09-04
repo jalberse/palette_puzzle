@@ -23,7 +23,11 @@ const Puzzle = () => {
   useEffect(() => {
     const fetchColors = async () => {
       try {
-        const response = await fetch("/api/get-daily-colors");
+        const response = await fetch("/api/get-daily-colors", {
+          cache: "no-store",
+        }
+
+        );
         if (response.ok) {
           // Example response:
           // {"colors":[{"start_color":"#7352ef","end_color":"#9eec59"}]}
