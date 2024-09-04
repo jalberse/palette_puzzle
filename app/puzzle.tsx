@@ -135,37 +135,51 @@ const Puzzle = () => {
           border-game-button-black
           border-2
           w-full
+          active:ring-1
+          active:ring-gray-500
         "/>
         <div className="grid grid-cols-3 items-center">
           <PaletteButton increase={true} onClick={addRed} className="
             bg-game-button-red
             active:bg-game-button-red-active
             text-game-button-white
+            active:ring-2
+            active:ring-red-500
           "/>
           <PaletteButton increase={true} onClick={addGreen} className="
             bg-game-button-green
             active:bg-game-button-green-active
             text-game-button-white
+            active:ring-2
+            active:ring-green-500
           "/>
           <PaletteButton increase={true} onClick={addBlue} className="
             bg-game-button-blue
             active:bg-game-button-blue-active
             text-game-button-white
+            active:ring-2
+            active:ring-blue-500
           "/>
           <PaletteButton increase={false} onClick={removeRed} className="
             bg-game-button-red
             active:bg-game-button-red-active
             text-game-button-white
+            active:ring-2
+            active:ring-red-500
           "/>
           <PaletteButton increase={false} onClick={removeGreen} className="
             bg-game-button-green
             active:bg-game-button-green-active
             text-game-button-white
+            active:ring-2
+            active:ring-green-500
           "/>
           <PaletteButton increase={false} onClick={removeBlue} className="
             bg-game-button-blue
             active:bg-game-button-blue-active
             text-game-button-white
+            active:ring-2
+            active:ring-blue-500
           "/>
         </div>
         <PaletteButton increase={false} onClick={removeWhite} className="
@@ -173,6 +187,8 @@ const Puzzle = () => {
           active:bg-game-button-black-active
           text-game-button-white
           w-full
+          active:ring-1
+          active:ring-gray-500
         " />
       </div>
     </div>
