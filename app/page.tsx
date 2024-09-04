@@ -1,6 +1,7 @@
 import Puzzle from "./puzzle";
 import Header from "./header";
 import Footer from "./footer";
+import { Analytics } from "@vercel/analytics/react"
 
 export default function Game() {
   // TODO Different modes, accessible through hamburger menu on top left of header.
@@ -34,6 +35,7 @@ export default function Game() {
         <Puzzle />
       </div>
       <Footer />
+      <Analytics />
     </div>
   );
 }
