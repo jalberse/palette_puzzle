@@ -85,8 +85,6 @@ const Puzzle = () => {
   const removeGreen = () => { playTurn({ r: 0, g: -1, b: 0 }); };
   const removeBlue = () => { playTurn({ r: 0, g: 0, b: -1 }); };
 
-  // TODO Disable a color button when we can't add/remove any more?
-
   // TODO Social sharing
   // TODO About page? Links to my stuff?
   
@@ -124,11 +122,21 @@ const Puzzle = () => {
     );
   }
 
+  // Check if we're maxed or minned out on any color
+  const redMaxed = currentColor.r >= 255;
+  const greenMaxed = currentColor.g >= 255;
+  const blueMaxed = currentColor.b >= 255;
+  const redMinned = currentColor.r <= 0;
+  const greenMinned = currentColor.g <= 0;
+  const blueMinned = currentColor.b <= 0;
+  const whiteMaxed = redMaxed && greenMaxed && blueMaxed;
+  const whiteMinned = redMinned && greenMinned && blueMinned;
+
   return (
     <div className="flex-col gap-1 items-center justify-center md:w-1/2 lg:w-1/4 mx-auto">
       <div className="px-8">
         <ColorDisplay targetColor={targetColor} currentColor={currentColor} score={score} />
-        <PaletteButton increase={true} onClick={addWhite} className="
+        <PaletteButton disabled={whiteMaxed} increase={true} onClick={addWhite} className="
           bg-game-button-white
           active:bg-game-button-white-active
           text-game-button-black
@@ -137,58 +145,66 @@ const Puzzle = () => {
           w-full
           active:ring-1
           active:ring-gray-500
+          disabled:filter disabled:brightness-50
         "/>
         <div className="grid grid-cols-3 items-center">
-          <PaletteButton increase={true} onClick={addRed} className="
+          <PaletteButton disabled={redMaxed} increase={true} onClick={addRed} className="
             bg-game-button-red
             active:bg-game-button-red-active
             text-game-button-white
             active:ring-2
             active:ring-red-500
+            disabled:filter disabled:brightness-50
           "/>
-          <PaletteButton increase={true} onClick={addGreen} className="
+          <PaletteButton disabled={greenMaxed} increase={true} onClick={addGreen} className="
             bg-game-button-green
             active:bg-game-button-green-active
             text-game-button-white
             active:ring-2
             active:ring-green-500
+            disabled:filter disabled:brightness-50
           "/>
-          <PaletteButton increase={true} onClick={addBlue} className="
+          <PaletteButton disabled={blueMaxed} increase={true} onClick={addBlue} className="
             bg-game-button-blue
             active:bg-game-button-blue-active
             text-game-button-white
             active:ring-2
             active:ring-blue-500
+            disabled:filter disabled:brightness-50
           "/>
-          <PaletteButton increase={false} onClick={removeRed} className="
+          <PaletteButton disabled={redMinned} increase={false} onClick={removeRed} className="
             bg-game-button-red
             active:bg-game-button-red-active
             text-game-button-white
             active:ring-2
             active:ring-red-500
+            disabled:filter disabled:brightness-50
           "/>
-          <PaletteButton increase={false} onClick={removeGreen} className="
+          <PaletteButton disabled={greenMinned} increase={false} onClick={removeGreen} className="
             bg-game-button-green
             active:bg-game-button-green-active
             text-game-button-white
             active:ring-2
             active:ring-green-500
+            disabled:filter disabled:brightness-50
           "/>
-          <PaletteButton increase={false} onClick={removeBlue} className="
+          <PaletteButton disabled={blueMinned} increase={false} onClick={removeBlue} className="
             bg-game-button-blue
             active:bg-game-button-blue-active
             text-game-button-white
             active:ring-2
             active:ring-blue-500
+            disabled:filter disabled:brightness-50
           "/>
         </div>
-        <PaletteButton increase={false} onClick={removeWhite} className="
+        <PaletteButton disabled={whiteMinned} increase={false} onClick={removeWhite} className="
           bg-game-button-black
           active:bg-game-button-black-active
           text-game-button-white
           w-full
           active:ring-1
           active:ring-gray-500
+          disabled:filter disabled:brightness-50
         " />
       </div>
     </div>

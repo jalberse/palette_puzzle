@@ -3,17 +3,20 @@ import React from 'react';
 interface PaletteButtonProps {
   increase: boolean;
   className: string;
+  disabled: boolean;
   onClick: () => void;
 }
 
 const PaletteButton: React.FC<PaletteButtonProps> = ({
   increase,
   className,
+  disabled,
   onClick,
 }) => {
   return (
     <div className="m-1">
     <button
+      disabled={disabled}
       onClick={onClick} 
       type="button"
       className={`
