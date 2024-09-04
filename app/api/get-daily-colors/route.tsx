@@ -1,0 +1,19 @@
+import { sql } from '@vercel/postgres';
+import { NextResponse } from 'next/server';
+
+export async function GET(request: Request) {
+  try {
+    // Fetch the start_color and end_color from the daily_colors_rgb table
+    const result = await sql`SELECT start_color, end_color FROM daily_colors_rgb;`;
+
+    if (result.rowCount === 0) {
+      return NextResponse.json({ message: 'No colors found' }, { status: 404 });
+    }
+
+    // Return the colors
+    return NextResponse.json({ colors: result.rows }, { status: 200 });
+  } catch (error) {
+    // Handle any errors
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
+}

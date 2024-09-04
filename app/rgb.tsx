@@ -1,5 +1,3 @@
-"use client";
-
 export type RGBColor = {
   r: number;
   g: number;
@@ -12,12 +10,16 @@ export function colorsEqual(a: RGBColor, b: RGBColor) {
 }
 
 // Approximate equality; tolerance is element-wise
-export function colorsApproxEqual(a: RGBColor, b: RGBColor, tolerance: number) {
-  return (
-    Math.abs(a.r - b.r) <= tolerance &&
-    Math.abs(a.g - b.g) <= tolerance &&
-    Math.abs(a.b - b.b) <= tolerance
-  );
+export function colorsApproxEqual(a: RGBColor, b: RGBColor, tolerance: number = 10): boolean {
+  if (!a || !b) {
+    throw new Error('Both color parameters must be provided');
+  }
+
+  const diffR = Math.abs(a.r - b.r);
+  const diffG = Math.abs(a.g - b.g);
+  const diffB = Math.abs(a.b - b.b);
+
+  return diffR <= tolerance && diffG <= tolerance && diffB <= tolerance;
 }
 
 export function contrastColor(color: RGBColor): RGBColor {
@@ -42,7 +44,7 @@ export function colorDistance(a: RGBColor, b: RGBColor) {
   );
 }
 
-export function getRandomColor() {
+export function getRandomColor(): RGBColor {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
   const b = Math.floor(Math.random() * 256);
@@ -52,6 +54,11 @@ export function getRandomColor() {
 // Implement a function for getting the string representation of an RGBColor
 export function rgbToString(color: RGBColor) {
   return `rgb(${color.r},${color.g},${color.b})`;
+}
+
+// Get a hex string representation of an RGBColor
+export function rgbToHexString(color: RGBColor) {
+  return `#${color.r.toString(16).padStart(2, '0')}${color.g.toString(16).padStart(2, '0')}${color.b.toString(16).padStart(2, '0')}`;
 }
 
 export function addColor(color: RGBColor, amount: RGBColor) {

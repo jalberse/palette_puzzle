@@ -26,8 +26,36 @@ const Puzzle = () => {
 
   // Note that [] as the second argument means that this effect will only run once on Mount.
   useEffect(() => {
-    setCurrentColor(getRandomColor());
-    setTargetColor(getRandomColor());
+    const fetchColors = async () => {
+      try {
+        const response = await fetch("/api/get-daily-colors");
+        if (response.ok) {
+          // Example response:
+          // {"colors":[{"start_color":"#7352ef","end_color":"#9eec59"}]}
+          const { colors } = await response.json();
+          const startColorHexStr = colors[0].start_color;
+          const endColorHexStr = colors[0].end_color;
+          const startColor = {
+            r: parseInt(startColorHexStr.slice(1, 3), 16),
+            g: parseInt(startColorHexStr.slice(3, 5), 16),
+            b: parseInt(startColorHexStr.slice(5, 7), 16),
+          };
+          const endColor = {
+            r: parseInt(endColorHexStr.slice(1, 3), 16),
+            g: parseInt(endColorHexStr.slice(3, 5), 16),
+            b: parseInt(endColorHexStr.slice(5, 7), 16),
+          };
+          setCurrentColor(startColor);
+          setTargetColor(endColor);
+        } else {
+          console.error("Failed to fetch daily colors");
+        }
+      } catch (error) {
+        console.error("Error fetching daily colors", error);
+      }
+    };
+
+    fetchColors();
   }, []);
 
   function playTurn(colorChange: RGBColor) {
@@ -71,6 +99,10 @@ const Puzzle = () => {
   // TODO Display another gradient with the "minimum path" to the target?
   //      So they can compare (and if it's very off, maybe they laugh and share it).
   // TODO Indicate new puzzle in X time to match our daily reset
+  if (!currentColor || !targetColor) {
+    return <div>Loading...</div>;
+  }
+
   const win = colorsApproxEqual(currentColor, targetColor, 1);
   // TODO Consider displaying this as a dialog/card instead, just over everything? That's how wordle does it.
   if (win) {
