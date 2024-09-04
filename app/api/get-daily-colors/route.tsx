@@ -1,6 +1,8 @@
 import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
+export const revalidate = 60; // 1 minute
+
 export async function GET(request: Request) {
   try {
     // Fetch the start_color and end_color from the daily_colors_rgb table.
