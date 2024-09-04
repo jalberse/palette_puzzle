@@ -3,6 +3,9 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   try {
+    // Don't run this query :)
+    return NextResponse.json({ message: 'This route is for creating the daily_colors_rgb table' }, { status: 200 });
+
     const result =
       await sql`CREATE TABLE daily_colors_rgb (
         id SERIAL PRIMARY KEY,
