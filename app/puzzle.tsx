@@ -114,24 +114,24 @@ const Puzzle = () => {
     // even if they user has only gotten an approximate match.
     return (
       <div className="px-8 md:w-1/2 lg:w-1/4 mx-auto">
-        <ColorDisplay targetColor={targetColor} currentColor={targetColor} score={score} />
-        <h1 className="flex justify-center mx-auto">You win!</h1>
-        <p className="flex justify-center mx-auto">Score: {score}</p>
-        <div className="flex-col justify-center my-2 border-4 border-slate-800 rounded-lg mx-8">
-          {history.map((color, index) => (
-            <div key={index}>
-              <div
-                className="mx-auto justify-center"
-                style={{
-                  width: "100%",
-                  height: "15px",
-                  backgroundColor: rgbToString(color),
-                }}
-              >
-              </div>
-            </div>
-          ))}
+      <ColorDisplay targetColor={targetColor} currentColor={targetColor} score={score} />
+      <p className="flex justify-center mx-auto text-3xl">You win!</p>
+      <p className="flex justify-center mx-auto text-xl">Score: {score}</p>
+      <div className="flex-col justify-center my-2 border-4 border-slate-800 rounded-lg mx-8">
+        {history.map((color, index) => (
+        <div key={index}>
+          <div
+          className="mx-auto justify-center"
+          style={{
+            width: "100%",
+            height: "15px",
+            backgroundColor: rgbToString(color),
+          }}
+          >
           </div>
+        </div>
+        ))}
+        </div>
       </div>
     );
   }
