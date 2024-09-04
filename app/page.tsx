@@ -1,5 +1,6 @@
 import Puzzle from "./puzzle";
 import Header from "./header";
+import Footer from "./footer";
 
 export default function Game() {
   // TODO Different modes, accessible through hamburger menu on top left of header.
@@ -27,9 +28,12 @@ export default function Game() {
   //      I'll need to actually release Reference Rover though, which will come after this release.
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <Puzzle />
+      <div className="flex-grow">
+        <Puzzle />
+      </div>
+      <Footer />
     </div>
   );
 }
