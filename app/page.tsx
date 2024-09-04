@@ -2,11 +2,7 @@ import Puzzle from "./puzzle";
 import Header from "./header";
 
 export default function Game() {
-
-  // TODO Have the help menu show up by default on first load,
-  //      but only when the help icon is clicked on later visits.
-
-  // TODO Different modes.
+  // TODO Different modes, accessible through hamburger menu on top left of header.
   // RGB (Additive) - the one we're starting with.
   // CMYK (Subtractive)
   // RYB (Subtractive) https://github.com/camme/ryb-color-mixer?tab=readme-ov-file 
