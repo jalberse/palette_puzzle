@@ -1,17 +1,34 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import Help from './help';
 
 const Header: React.FC = () => {
   const [helpOpen, setHelpOpen] = useState(false);
 
+  useEffect(()=>{
+    let show_help = localStorage.getItem('show_help');
+    // If show_help isn't found, show the help menu by default.
+    if(!show_help){
+      setHelpOpen(true);
+      localStorage.setItem('show_help', 'true');
+    }
+    else if (show_help === 'true'){
+      setHelpOpen(true);
+    }
+    else{
+      setHelpOpen(false);
+    }
+  },[])
+
   const handleHelpOpen = () => {
+    localStorage.setItem('show_help', 'true');
     setHelpOpen(true);
   };
 
   const handleHelpClose = () => {
+    localStorage.setItem('show_help', 'false');
     setHelpOpen(false);
   };
 

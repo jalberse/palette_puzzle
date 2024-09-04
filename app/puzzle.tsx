@@ -92,8 +92,12 @@ const Puzzle = () => {
 
   // TODO Disable a color button when we can't add/remove any more?
 
+  // TODO Social sharing
+  // TODO About page? Links to my stuff?
+
   // TODO More similar to wordle, I might expect that we lift the state up
   //   and display a win "card" over the puzzle? Go check out wordle.
+  //   Generally improve the win screen...
   
   // TODO Display time
   // TODO Display another gradient with the "minimum path" to the target?
