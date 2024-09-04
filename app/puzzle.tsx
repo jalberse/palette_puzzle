@@ -1,16 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { addColor, colorsApproxEqual, colorsEqual, getRandomColor, RGBColor, rgbToString } from "./rgb";
+import { colorsApproxEqual, RGBColor, rgbToString } from "./rgb";
 import ColorDisplay from './ColorDisplay';
 import PaletteButton from './PaletteButton';
 
-// TODO Add a timer. wordle does similarly. Score and time.
-
-// TODO Generate a new start and target color each day (currentColor becomes separate from the start color).
-//      Ensure they are some minimum distance away.
-
-// TODO Add advertisement. I need money.
+// TODO Add a timer to give time along with score on win.
 
 // TODO Calculate the minimum possible score for the current target color, so we can see
 //      if someone got a perfect score or grade them? It's fine without this, there can
@@ -94,21 +89,14 @@ const Puzzle = () => {
 
   // TODO Social sharing
   // TODO About page? Links to my stuff?
-
-  // TODO More similar to wordle, I might expect that we lift the state up
-  //   and display a win "card" over the puzzle? Go check out wordle.
-  //   Generally improve the win screen...
   
-  // TODO Display time
-  // TODO Display another gradient with the "minimum path" to the target?
-  //      So they can compare (and if it's very off, maybe they laugh and share it).
   // TODO Indicate new puzzle in X time to match our daily reset
+  
   if (!currentColor || !targetColor) {
     return <div>Loading...</div>;
   }
 
   const win = colorsApproxEqual(currentColor, targetColor, 1);
-  // TODO Consider displaying this as a dialog/card instead, just over everything? That's how wordle does it.
   if (win) {
     // Note that we send the target color for both, to ensure they match
     // even if they user has only gotten an approximate match.
