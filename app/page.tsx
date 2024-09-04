@@ -6,27 +6,6 @@ export default function Game() {
   // TODO Have the help menu show up by default on first load,
   //      but only when the help icon is clicked on later visits.
 
-  // TODO Make the target and end colors change daily rather than randomly generating them on load.
-  //      The extremely dumb way is to hard-code that and then redeploy a change each day changing the color.
-  //      The less dumb way is to set up a basic database that stores the colors, and a cron job.
-  //        That also sets us up for other database stuff later (multiple games being the obvious),
-  //        track history, and lets us put the DB and cron job stuff on the resume line.
-  // So... switch to a DB to store the target color and the end color: https://vercel.com/docs/storage/vercel-postgres/quickstart
-  // And then set up a cron job to change the target color and end color daily: https://vercel.com/docs/solutions/vercel-cron-jobs
-  // And of course set up our frontend to pull from there rather than randomly generating them.
-  // https://vercel.com/templates/next.js/vercel-cron
-  // Steps: 
-  // 1. Create the database, table, populate with 2 colors:
-  // https://vercel.com/docs/storage/vercel-postgres/quickstart
-  // 2. Change the code to read from that instead of generating randomly.
-  // 3. Set up the cron job to change the colors daily.
-  // Note that I didn't mention dev vs production databases.
-  //   That's because I don't want to pay for 2. Thanks, Vercel.
-  //   We'll do it live!
-  // Once I fix the adding-colors endpoint, we just need a cron job to ping it once a day (and ensure security is fine,
-  //   which I think I'll see once we get to the cron setup).
-  //   (plus reading from the DB for the colors on mounting the puzzle)
-
   // TODO Different modes.
   // RGB (Additive) - the one we're starting with.
   // CMYK (Subtractive)

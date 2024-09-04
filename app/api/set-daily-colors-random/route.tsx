@@ -5,7 +5,6 @@ import { NextResponse } from 'next/server';
 // TODO Consider another endpoint that uses the url search params to set the colors instead of (semi-randomly)
 //      selecting them as in this endpoint. That would allow us to curate the colors.
 //      But I don't have the energy to curate colors forever, so this will be able to run "forever" with a cron job.
-// TODO Also, we should change this to a POST for the cron to hit.
 export async function GET(request: Request) {
   const startColor: RGBColor = getRandomColor();
   // Generate an endColor until it's not the same as the startColor

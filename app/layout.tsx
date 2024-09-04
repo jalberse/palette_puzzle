@@ -16,6 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3208579035615674" crossOrigin="anonymous"></script>
+      </head>
       <body className={thicketFont.className}>{children}</body>
     </html>
   );
